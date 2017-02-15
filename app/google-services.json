@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "829271108976",
+    "firebase_url": "https://greencare-11edd.firebaseio.com",
+    "project_id": "greencare-11edd",
+    "storage_bucket": "greencare-11edd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829271108976:android:78e6cef9c0a0b93c",
+        "android_client_info": {
+          "package_name": "com.alvin.greencare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829271108976-7pfnmbhspqqjq26bk6j6qgg8iv8bmbv4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alvin.greencare",
+            "certificate_hash": "3FE8A22C70B83351CA0FD42320EC74353C4D5334"
+          }
+        },
+        {
+          "client_id": "829271108976-1kcajgbr38s622ng8f2h0abpl95tq82n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi3cE5HBPNI0SG_5tRfQYIUmjJ0Wvj2FY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829271108976-1kcajgbr38s622ng8f2h0abpl95tq82n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
