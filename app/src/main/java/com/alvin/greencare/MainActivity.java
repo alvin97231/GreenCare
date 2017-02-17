@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,11 +22,17 @@ import com.alvin.greencare.Auth.*;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static android.R.attr.button;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private ListView listView;
+    private LinearLayout layout;
+    private Button testButton;
 
     private static final String TAG = "Main";
 
@@ -49,7 +57,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //LAYOUTS
+        layout = (LinearLayout) findViewById(R.id.main_layout);
+
+        //VIEWS
+        listView = (ListView) findViewById(R.id.list_view);
+
+        //BUTTONS
+        testButton = (Button) findViewById(R.id.test_button);
+
         mAuth = FirebaseAuth.getInstance();
+
         // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -58,28 +76,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-                    LinearLayout layout = (LinearLayout) findViewById(R.id.main_layout);
-                    Button button = new Button(MainActivity.this);
-                    layout.addView(button);
-                    button.setText(user.getDisplayName());
-
+                    updateUI(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-
-                    // Set up ListView and Adapter
-                    ListView listView = (ListView) findViewById(R.id.list_view);
-
-                    MyArrayAdapter adapter = new MyArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_2, CLASSES);
-                    adapter.setDescriptionIds(DESCRIPTION_IDS);
-
-                    listView.setAdapter(adapter);
-                    listView.setOnItemClickListener(MainActivity.this);
+                    updateUI(user);
                 }
             }
         };
         // [END auth_state_listener]
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            findViewById(R.id.test_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.list_view).setVisibility(View.GONE);
+            Log.d(TAG, user.getEmail());
+            testButton.setText(user.getEmail());
+        } else {
+            MyArrayAdapter adapter = new MyArrayAdapter(this, android.R.layout.simple_list_item_2, CLASSES);
+            adapter.setDescriptionIds(DESCRIPTION_IDS);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(this);
+        }
     }
 
     @Override
@@ -88,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(new Intent(this, clicked));
     }
 
-    public static class MyArrayAdapter extends ArrayAdapter<Class> {
+    public class MyArrayAdapter extends ArrayAdapter<Class> {
 
         private Context mContext;
         private Class[] mClasses;
