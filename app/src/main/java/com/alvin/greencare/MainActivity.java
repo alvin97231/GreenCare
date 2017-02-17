@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,8 +20,6 @@ import android.widget.TextView;
 import com.alvin.greencare.Auth.*;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static android.R.attr.button;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
